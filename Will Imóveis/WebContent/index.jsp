@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +11,14 @@
 
 	<title>Will Imóveis</title>
 	
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-	
 </head>
 <body>
 	<header>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
+      <a href="index.jsp" class="navbar-brand d-flex align-items-center">
         <strong>À Procura de um Imóvel</strong>
       </a>
     </div>
@@ -29,31 +29,42 @@
 
   <section class="jumbotron text-center" style= "background-image: url(images/city.jpg);background-size: cover;">
     <div class="container">
-      <h1 class="badge badge-primary text-wrap" style= "background-color: #ffffff9e;color: Black; font-size:160%;">Album example</h1>
-      <p class="badge badge-primary text-wrap" style= "background-color: #ffffff9e;color: Black; font-size:160%;">Something short and leading about the collection below its contents, the creator, etc. Make it short and sweet, but not too short so folks don t simply skip over it entirely.</p>
+      <h1 class="badge badge-primary text-wrap" style= "background-color: #00000059;color: white; font-size:300%;">Imóveis à venda!!!</h1>
+      <p class="badge badge-primary text-wrap" style= "background-color: #00000059;color: white; font-size:180%;">Você está à procura de um imóvel?? Na empresa will imóveis tem opções incríveis para você que está à Procura da Felicidade</p>
+      <div>
+      	<form action="ImovelController" method="get">
+			<input class="btn btn-primary my-2" type = "submit" value = "Clique aqui para ver nossas opções">
+		</form>
+        <p>
+        	<a href="form.jsp" class="btn btn-secondary my-2">Adicione um Imóvel</a>
+        </p>
+      </div>
     </div>
   </section>
+	<form action="ImovelController" method="get">
 
+	</form>
   <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row">
+       <c:forEach items="${lista}" var = "imoveis">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/></svg>
+          <img class="card-img-top"  src="images/city.jpg" alt="Card image cap">
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Nome do Imovel: ${imoveis.nomeImovel}</p>
+              <p class="card-text">Nº de Quartos: ${imoveis.qtd_quartos}</p>
+              <p class="card-text">Nº de Banheiros: ${imoveis.qtd_banheiros}</p>
+              <p class="card-text">Área do Imóvel: ${imoveis.area} m²</p>
+              <p class="card-text">Descrição: ${imoveis.descricao}</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">R$ ${imoveis.valor}</small>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </c:forEach>  
+     </div>
     </div>
   </div>
 
